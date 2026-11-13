@@ -1,0 +1,1576 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Xu Jie — NTU MSc Business Analytics student and aspiring business/data analyst with hands-on experience in SQL, Python, Power BI, Tableau, BI dashboards and commercial analytics.">
+  <meta name="author" content="Xu Jie">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#fbf6ec">
+  <title>Xu Jie · Aspiring Business &amp; Data Analyst</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a2e'/%3E%3Cpath d='M13 15h38L38 33v16l-12-6V33z' fill='%23f2542d'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #fbf6ec;
+      --paper-2: #f2ead8;
+      --card: #fffdf8;
+      --ink: #1a1a2e;
+      --ink-soft: #4a4a63;
+      --line: rgba(26, 26, 46, 0.2);
+      --coral: #f2542d;
+      --coral-soft: #ffb199;
+      --yellow: #ffd23f;
+      --teal: #0b6e77;
+      --teal-soft: #a8dcd9;
+      --indigo: #35365f;
+      --display: "Avenir Next", "Futura", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      --page: min(1160px, calc(100% - 48px));
+      --shadow: 5px 5px 0 var(--ink);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(rgba(26, 26, 46, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 26, 46, 0.045) 1px, transparent 1px);
+      background-size: 32px 32px;
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    ::selection {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 3px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      min-height: 44px;
+      padding: 10px 16px;
+      transform: translateY(-160%);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 2px solid var(--ink);
+      background: rgba(251, 246, 236, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-shell {
+      width: var(--page);
+      min-height: 70px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .monogram {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: var(--ink);
+      box-shadow: 3px 3px 0 var(--coral);
+      color: var(--paper);
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+    }
+
+    .monogram span {
+      color: var(--coral);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(4px, 1.2vw, 14px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: var(--yellow);
+    }
+
+    main {
+      display: block;
+      overflow-x: clip;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      width: var(--page);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      align-items: center;
+      gap: clamp(32px, 6vw, 80px);
+      padding: clamp(48px, 6vw, 84px) 0 clamp(40px, 5vw, 64px);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--coral);
+      content: "";
+    }
+
+    h1 {
+      margin-bottom: 26px;
+      font-family: var(--display);
+      font-size: clamp(3.6rem, 11.5vw, 10.5rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .name-line {
+      display: inline-block;
+    }
+
+    .name-line:first-child {
+      margin-right: 0.2em;
+    }
+
+    .name-line--mark {
+      position: relative;
+      z-index: 0;
+      display: inline-block;
+    }
+
+    .name-line--mark::after {
+      position: absolute;
+      right: -3%;
+      bottom: 0.03em;
+      left: -3%;
+      z-index: -1;
+      height: 0.3em;
+      transform: skew(-6deg);
+      background: var(--yellow);
+      content: "";
+    }
+
+    .role {
+      margin-bottom: 18px;
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .role span {
+      color: var(--coral);
+    }
+
+    .hero-summary {
+      max-width: 570px;
+      margin-bottom: 26px;
+      color: var(--ink-soft);
+      font-size: clamp(1rem, 1.4vw, 1.1rem);
+    }
+
+    .hero-meta {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 10px 18px;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: var(--card);
+      box-shadow: 3px 3px 0 var(--ink);
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .hero-meta strong {
+      display: block;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 11px 22px;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: var(--card);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .button--primary {
+      background: var(--coral);
+    }
+
+    .button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .hero__portrait {
+      position: relative;
+      width: min(100%, 430px);
+      aspect-ratio: 4 / 5;
+      justify-self: center;
+      isolation: isolate;
+    }
+
+    .portrait-arch {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border: 2px solid var(--ink);
+      border-radius: 999px 999px 22px 22px;
+      background: #fff;
+      box-shadow: 9px 9px 0 var(--ink);
+    }
+
+    .portrait-arch img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 14%;
+    }
+
+    .blob {
+      position: absolute;
+      top: -7%;
+      right: -12%;
+      z-index: -1;
+      width: 64%;
+      aspect-ratio: 1;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .dotgrid {
+      position: absolute;
+      bottom: -6%;
+      left: -14%;
+      z-index: -1;
+      width: 46%;
+      height: 32%;
+      background-image: radial-gradient(var(--ink) 1.6px, transparent 1.8px);
+      background-size: 14px 14px;
+      opacity: 0.4;
+    }
+
+    .sticker {
+      position: absolute;
+      z-index: 2;
+      padding: 7px 14px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sticker--a {
+      bottom: 16%;
+      left: -8%;
+      transform: rotate(-5deg);
+      background: var(--yellow);
+    }
+
+    .sticker--b {
+      right: -6%;
+      bottom: 5%;
+      transform: rotate(4deg);
+      background: var(--teal-soft);
+    }
+
+    /* ---------- Funnel guide ---------- */
+    .funnel-section {
+      width: var(--page);
+      margin: 0 auto;
+      padding: clamp(16px, 3vw, 40px) 0 clamp(56px, 7vw, 96px);
+    }
+
+    .funnel-note {
+      max-width: 660px;
+      margin: 0 auto 26px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    .funnel-note span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .funnel {
+      display: grid;
+      max-width: 900px;
+      gap: 6px;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+    }
+
+    .funnel li {
+      width: var(--w);
+      margin: 0 auto;
+      animation: rise 600ms ease both;
+      animation-delay: calc(var(--i) * 90ms);
+    }
+
+    .funnel li:nth-child(1) { --i: 0; --w: 100%; --bg: var(--ink); --fg: var(--paper); }
+    .funnel li:nth-child(2) { --i: 1; --w: 86%; --bg: var(--indigo); --fg: #fff; }
+    .funnel li:nth-child(3) { --i: 2; --w: 72%; --bg: var(--teal); --fg: #fff; }
+    .funnel li:nth-child(4) { --i: 3; --w: 58%; --bg: var(--yellow); --fg: var(--ink); }
+    .funnel li:nth-child(5) { --i: 4; --w: 44%; --bg: var(--coral); --fg: var(--ink); }
+
+    .funnel a {
+      display: flex;
+      min-height: 54px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 30px;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 20px 100%);
+      background: var(--bg);
+      color: var(--fg);
+      text-decoration: none;
+      transition: filter 160ms ease;
+    }
+
+    .funnel a:hover {
+      filter: brightness(1.14);
+    }
+
+    .funnel a:focus-visible {
+      outline: none;
+      box-shadow: inset 0 0 0 3px var(--yellow), inset 0 0 0 6px var(--ink);
+    }
+
+    .funnel-name {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .funnel-name b {
+      margin-right: 10px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+
+    .funnel-to {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ---------- Sections ---------- */
+    .section {
+      width: var(--page);
+      margin: 0 auto;
+      padding: clamp(64px, 8vw, 104px) 0;
+    }
+
+    .section + .section {
+      border-top: 2px dashed var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.7fr);
+      gap: 40px;
+      align-items: end;
+      margin-bottom: clamp(32px, 4vw, 52px);
+    }
+
+    .stage {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 16px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .stage-no {
+      padding: 3px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    .dots {
+      display: inline-flex;
+      gap: 5px;
+    }
+
+    .dots i {
+      width: 11px;
+      height: 11px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    .dots-1 i:nth-child(-n+1),
+    .dots-2 i:nth-child(-n+2),
+    .dots-3 i:nth-child(-n+3),
+    .dots-4 i:nth-child(-n+4),
+    .dots-5 i:nth-child(-n+5) {
+      background: var(--coral);
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 5.4vw, 4.7rem);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--ink-soft);
+    }
+
+    strong {
+      font-weight: 750;
+    }
+
+    /* About */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .capability {
+      padding: 28px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .card-number {
+      display: inline-grid;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 44px;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      background: var(--yellow);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 800;
+    }
+
+    .capability:nth-child(2) .card-number {
+      background: var(--coral-soft);
+    }
+
+    .capability:nth-child(3) .card-number {
+      background: var(--teal-soft);
+    }
+
+    .capability h3 {
+      margin-bottom: 12px;
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .capability p {
+      margin-bottom: 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+    }
+
+    .focus-label {
+      margin: 44px 0 14px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .chips,
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chips li,
+    .pills li {
+      padding: 6px 16px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--card);
+      font-size: 0.92rem;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    .chips li:nth-child(odd),
+    .pills li.hot {
+      background: var(--yellow);
+    }
+
+    /* Education */
+    .education {
+      margin-top: clamp(64px, 8vw, 104px);
+      padding-top: clamp(40px, 5vw, 64px);
+      border-top: 2px dashed var(--line);
+    }
+
+    .education-head {
+      margin-bottom: 32px;
+    }
+
+    .education-head h3 {
+      margin-bottom: 8px;
+      font-family: var(--display);
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .education-head p {
+      margin-bottom: 0;
+      color: var(--ink-soft);
+    }
+
+    .education-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .education-list,
+    .side-panel {
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .education-item {
+      padding: 26px 28px;
+    }
+
+    .education-item + .education-item {
+      border-top: 2px dashed var(--line);
+    }
+
+    .education-item h4 {
+      margin: 0 0 6px;
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .degree {
+      margin-bottom: 10px;
+      color: var(--ink-soft);
+    }
+
+    .education-meta {
+      display: inline-block;
+      margin-bottom: 0;
+      padding: 3px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper-2);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .education-note {
+      margin: 14px 0 0;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .education-note strong {
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .side-panel {
+      padding: 26px 28px;
+    }
+
+    .side-panel h4 {
+      margin: 0 0 12px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .language-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 10px 0;
+      border-bottom: 2px dashed var(--line);
+      color: var(--ink-soft);
+    }
+
+    .language-row strong {
+      color: var(--ink);
+    }
+
+    .interests-title {
+      margin-top: 30px !important;
+    }
+
+    .interest-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--ink-soft);
+    }
+
+    .interest-list li {
+      margin-bottom: 10px;
+    }
+
+    /* Experience + projects share bullet styling */
+    .entry-body ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .entry-body li {
+      position: relative;
+      max-width: 980px;
+      margin: 0;
+      padding: 0 0 14px 24px;
+      color: var(--ink-soft);
+    }
+
+    .entry-body li::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: var(--coral);
+      content: "▸";
+      font-weight: 800;
+    }
+
+    .entry-body li:last-child {
+      padding-bottom: 0;
+    }
+
+    .entry-body strong {
+      background: linear-gradient(transparent 58%, rgba(255, 210, 63, 0.75) 58%);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 24px;
+    }
+
+    .experience-card {
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .entry-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .experience-card summary.entry-head {
+      position: relative;
+      min-height: 96px;
+      padding: 24px 82px 24px 28px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .experience-card summary.entry-head::-webkit-details-marker {
+      display: none;
+    }
+
+    .experience-card summary.entry-head::after {
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      transform: translateY(-50%);
+      border: 2px solid var(--ink);
+      border-radius: 9px;
+      background: var(--yellow);
+      content: "+";
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .experience-card[open] summary.entry-head::after {
+      background: var(--coral);
+      content: "–";
+    }
+
+    .experience-card .entry-body {
+      padding: 22px 28px 28px;
+      border-top: 2px dashed var(--line);
+    }
+
+    .company {
+      display: block;
+      margin-bottom: 2px;
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .company small {
+      color: var(--ink-soft);
+      font-size: 0.6em;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .position {
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    .date {
+      padding: 4px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper-2);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .project-card::before {
+      display: block;
+      height: 14px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--yellow);
+      content: "";
+    }
+
+    .project-card:nth-child(2)::before {
+      background: var(--coral-soft);
+    }
+
+    .project-card:nth-child(3)::before {
+      background: var(--teal-soft);
+    }
+
+    .project-top {
+      padding: 24px 26px 18px;
+    }
+
+    .project-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .project-card .company {
+      margin-bottom: 8px;
+      font-size: 1.35rem;
+    }
+
+    .project-card .entry-body {
+      flex: 1;
+      margin: 0 26px;
+      padding: 18px 0 26px;
+      border-top: 2px dashed var(--line);
+    }
+
+    /* Skills */
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .skill-group {
+      padding: 24px 26px 26px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .skill-group h3 {
+      margin: 0 0 16px;
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .skills-legend {
+      margin: 24px 0 0;
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+    }
+
+    .skills-legend span {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 8px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--yellow);
+      vertical-align: -2px;
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-section {
+      border-top: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .contact-inner {
+      width: var(--page);
+      margin: 0 auto;
+      padding: clamp(72px, 10vw, 128px) 0 40px;
+    }
+
+    .contact-section .stage {
+      color: var(--yellow);
+    }
+
+    .contact-section .dots i {
+      border-color: var(--paper);
+      background: transparent;
+    }
+
+    .contact-section .dots-5 i {
+      background: var(--coral);
+    }
+
+    .contact-section h2 {
+      max-width: 900px;
+      margin-bottom: 26px;
+      line-height: 1.14;
+      font-size: clamp(3rem, 8vw, 7rem);
+    }
+
+    .contact-section h2 mark {
+      padding: 0 0.12em;
+      border-radius: 8px;
+      background: var(--coral);
+      color: var(--ink);
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    .contact-lead {
+      max-width: 560px;
+      margin-bottom: 34px;
+      color: rgba(251, 246, 236, 0.82);
+      font-size: 1.1rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 96px;
+    }
+
+    .contact-section .button {
+      border-color: var(--paper);
+      box-shadow: 4px 4px 0 var(--yellow);
+    }
+
+    .contact-section .button:hover {
+      box-shadow: 6px 6px 0 var(--yellow);
+    }
+
+    .contact-section .button:active {
+      box-shadow: 2px 2px 0 var(--yellow);
+    }
+
+    .contact-section :focus-visible {
+      outline-color: var(--yellow);
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 22px;
+      border-top: 2px dashed rgba(251, 246, 236, 0.3);
+      color: rgba(251, 246, 236, 0.7);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+      }
+
+      .card-grid,
+      .project-grid,
+      .skills-layout,
+      .education-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .card-number {
+        margin-bottom: 28px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --page: min(100% - 32px, 620px);
+      }
+
+      html {
+        scroll-padding-top: 72px;
+      }
+
+      .nav-shell {
+        min-height: 64px;
+      }
+
+      .nav-links {
+        max-width: calc(100vw - 96px);
+        gap: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links a {
+        padding: 0 9px;
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 56px;
+        padding-top: 48px;
+      }
+
+      h1 {
+        font-size: clamp(3.6rem, 26vw, 8rem);
+      }
+
+      .hero__portrait {
+        width: min(88%, 380px);
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .entry-head {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .experience-card summary.entry-head {
+        padding-right: 72px;
+      }
+
+      .date {
+        justify-self: start;
+      }
+
+      .funnel li:nth-child(2) { --w: 92%; }
+      .funnel li:nth-child(3) { --w: 84%; }
+      .funnel li:nth-child(4) { --w: 76%; }
+      .funnel li:nth-child(5) { --w: 68%; }
+
+      .funnel a {
+        padding: 10px 26px;
+      }
+
+      .funnel-to {
+        display: none;
+      }
+
+      .footer-line {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .sticker--a {
+        left: -4%;
+      }
+
+      .sticker--b {
+        right: -2%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-delay: 0s !important;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .skip-link {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .section,
+      .experience-card,
+      .project-card,
+      .capability {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="monogram" href="#home" aria-label="Xu Jie — return to introduction">X<span>J</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="page-title">
+      <div class="hero__content">
+        <p class="eyebrow">Hello, I’m</p>
+        <h1 id="page-title"><span class="name-line">Xu</span><span class="name-line name-line--mark">Jie</span></h1>
+        <p class="role">Aspiring Business <span>&amp;</span> Data Analyst</p>
+        <p class="hero-summary">I connect data with real business problems: understanding not only what the numbers show, but how insights can support better decisions. My hands-on experience spans data analytics, BI dashboards and sales operations across automotive, technology and esports.</p>
+        <p class="hero-meta"><strong>MSc in Business Analytics</strong>Nanyang Technological University · Singapore</p>
+        <div class="actions" aria-label="Contact links">
+          <a class="button button--primary" href="mailto:XUJI0030@e.ntu.edu.sg?subject=Business%20Analytics%20Enquiry">Email me <span aria-hidden="true">↗</span></a>
+          <a class="button" href="https://www.linkedin.com/in/ntu-xujie" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="hero__portrait">
+        <div class="blob" aria-hidden="true"></div>
+        <div class="dotgrid" aria-hidden="true"></div>
+        <div class="portrait-arch">
+          <img src="assets/profile.jpeg" alt="Professional portrait of Xu Jie">
+        </div>
+        <p class="sticker sticker--a">Open to analytics roles</p>
+        <p class="sticker sticker--b">Based in Singapore</p>
+      </div>
+    </section>
+
+    <section class="funnel-section" aria-labelledby="guide-title">
+      <p class="funnel-note"><span id="guide-title">How to read this page</span>Five short sections, from a first look to a conversation. Pick one to jump straight to it.</p>
+      <nav aria-label="Page guide">
+        <ol class="funnel">
+          <li><a href="#about"><span class="funnel-name"><b>01</b>About</span><span class="funnel-to">Profile &amp; education</span></a></li>
+          <li><a href="#experience"><span class="funnel-name"><b>02</b>Experience</span><span class="funnel-to">Work history</span></a></li>
+          <li><a href="#projects"><span class="funnel-name"><b>03</b>Projects</span><span class="funnel-to">Selected work</span></a></li>
+          <li><a href="#skills"><span class="funnel-name"><b>04</b>Skills</span><span class="funnel-to">Toolkit</span></a></li>
+          <li><a href="#contact"><span class="funnel-name"><b>05</b>Contact</span><span class="funnel-to">Get in touch</span></a></li>
+        </ol>
+      </nav>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <div>
+          <p class="stage"><span class="stage-no">Section 01</span>About<span class="dots dots-1" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></p>
+          <h2 id="about-title">From questions<br>to clarity.</h2>
+        </div>
+        <p>My work sits where commercial priorities, analytical structure and cross-functional execution meet. I translate business questions into measurable insights.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="capability">
+          <span class="card-number">01</span>
+          <h3>Commercial &amp; Sales Analytics</h3>
+          <p>Built a 180-day, five-stage lead conversion analysis at NIO and ran KPI reviews for 15 sales representatives at Ricoh, turning commercial questions into metrics teams can act on.</p>
+        </article>
+        <article class="capability">
+          <span class="card-number">02</span>
+          <h3>Dashboards &amp; Data Systems</h3>
+          <p>Power BI dashboards and Trino / Spark SQL workflows with drill-down by region, area, squad and sales Fellow, so performance is visible to the people who act on it.</p>
+        </article>
+        <article class="capability">
+          <span class="card-number">03</span>
+          <h3>Cross-functional Execution</h3>
+          <p>Worked across automotive, technology and esports, with sales teams, 20+ sponsor clients and fan communities, translating between business questions and data.</p>
+        </article>
+      </div>
+
+      <p class="focus-label">Where I want to grow</p>
+      <ul class="chips">
+        <li>Business Analytics</li>
+        <li>Data Analytics</li>
+        <li>Business Intelligence</li>
+        <li>Sales &amp; Commercial Analytics</li>
+      </ul>
+
+      <div class="education" id="education" aria-labelledby="education-title">
+        <div class="education-head">
+          <h3 id="education-title">Built to keep learning.</h3>
+          <p>Business analytics training supported by a foundation in information systems and management.</p>
+        </div>
+
+        <div class="education-layout">
+          <div class="education-list">
+            <article class="education-item">
+              <h4>Nanyang Technological University</h4>
+              <p class="degree">MSc in Business Analytics · Nanyang Business School</p>
+              <p class="education-meta">Singapore · Aug 2026 — Dec 2027 (expected)</p>
+            </article>
+            <article class="education-item">
+              <h4>Donghua University</h4>
+              <p class="degree">Bachelor of Management in Information Management and Information Systems</p>
+              <p class="education-meta">China · Sep 2022 — Jun 2026 · GPA 4.06 / 5.0</p>
+              <p class="education-note"><strong>Relevant coursework:</strong> Applied Statistics · Data Analytics and Data Mining · Big Data Technologies and Applications · Management Information Systems · Customer Relationship Analytics and Management</p>
+              <p class="education-note"><strong>Leadership:</strong> Deputy Director, Public Relations Department, School Student Union · Organizational Officer, University Student Union · Member, Undergraduate Admissions Office Media Center</p>
+            </article>
+          </div>
+
+          <aside class="side-panel" aria-label="Languages and interests">
+            <h4>Languages</h4>
+            <div class="language-row"><strong>Chinese</strong><span>Native</span></div>
+            <div class="language-row"><strong>English</strong><span>Business</span></div>
+
+            <h4 class="interests-title">Interests</h4>
+            <ul class="interest-list">
+              <li>Business intelligence and data visualisation for commercial decisions</li>
+              <li>Esports, digital content creation and online communities</li>
+              <li>Technology for education and social impact</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading">
+        <div>
+          <p class="stage"><span class="stage-no">Section 02</span>Experience<span class="dots dots-2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></p>
+          <h2 id="experience-title">Analysis in the<br>real world.</h2>
+        </div>
+        <p>Three roles across automotive, technology and esports. Every responsibility and result is shown below.</p>
+      </div>
+
+      <div class="timeline">
+        <details class="experience-card" open>
+          <summary class="entry-head">
+            <div><span class="company">NIO Inc.</span><span class="position">Data Analyst Intern · Digitalization Team · Shanghai, China</span></div>
+            <span class="date">Oct 2025 — Jun 2026</span>
+          </summary>
+          <div class="entry-body">
+            <ul>
+              <li>Cleaned and unified sales lead, channel, test-drive and lock-order data, including reclassifying Ledao campaign channels, to enable <strong>sales conversion analysis</strong> and dashboard development.</li>
+              <li>Developed and iterated <strong>BI dashboards</strong> for call-list pools, in-stock vehicles, new model launches, store traffic and eATV user value, enabling drill-down analysis by region, area, squad and sales Fellow.</li>
+              <li>Leveraged <strong>Trino and Spark SQL</strong> to create a <strong>180-day lead conversion analysis</strong> across browsing, follow-up, connection, test-drive and lock-order stages, producing key metrics for sales effectiveness evaluation.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="experience-card" open>
+          <summary class="entry-head">
+            <div><span class="company">Ricoh (China) Investment Co., Ltd.</span><span class="position">Data Analyst Intern · Shanghai, China</span></div>
+            <span class="date">Jul 2025 — Aug 2025</span>
+          </summary>
+          <div class="entry-body">
+            <ul>
+              <li>Calculated monthly machine volume and sales revenue for <strong>15 sales representatives</strong> with <strong>Excel XLOOKUP and SUMIFS</strong>, enabling KPI review and underperformance diagnosis.</li>
+              <li>Created <strong>Power BI dashboards</strong> by industry and region to monitor monthly coverage and inform new-market expansion decisions.</li>
+              <li>Monitored maintenance contracts for <strong>35 companies</strong> and consolidated monthly trend reports to inform sales strategy refinement.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="experience-card" open>
+          <summary class="entry-head">
+            <div><span class="company">Hero Esports <small>(formerly VSPO)</small></span><span class="position">Commercial Client Execution Intern · Shanghai, China</span></div>
+            <span class="date">Apr 2024 — Sep 2024</span>
+          </summary>
+          <div class="entry-body">
+            <ul>
+              <li>Executed commercial operations for the <strong>2024 KPL Spring and Summer events</strong>, coordinating with <strong>20+ sponsor clients</strong> to collect requirements and protect client entitlements.</li>
+              <li>Evaluated sponsorship data and prepared <strong>5+ reports</strong> to identify growth opportunities and inform commercial strategy improvement.</li>
+              <li>Expanded <strong>18 core fan communities</strong>, achieved <strong>25% engagement growth</strong>, and added <strong>3,000+ followers</strong> through Douyin and Xiaohongshu content operations.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <div>
+          <p class="stage"><span class="stage-no">Section 03</span>Projects<span class="dots dots-3" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></p>
+          <h2 id="projects-title">Hands-on<br>projects.</h2>
+        </div>
+        <p>Three projects spanning customer conversion, product development and market strategy.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-label">Mar 2026 — Jun 2026</span>
+            <span class="company">NIO – 180-Day Lead Conversion Analysis</span>
+            <span class="position">Customer journey analytics · Trino · Spark SQL</span>
+          </div>
+          <div class="entry-body">
+            <ul>
+              <li>Built a <strong>180-day lead conversion flow</strong> covering browsing, follow-up, connection, test-drive and lock-order stages.</li>
+              <li>Integrated <strong>customer journey data</strong> across multiple stages and developed conversion metrics for sales-effectiveness evaluation and business drill-downs.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-label">Jul 2024 — May 2025</span>
+            <span class="company">Qingmang Wuyu – Science Education Platform</span>
+            <span class="position">Team Leader · Django · MySQL · Neo4j</span>
+          </div>
+          <div class="entry-body">
+            <ul>
+              <li>Led <strong>architecture design, core development and team coordination</strong> for a science-education web platform.</li>
+              <li>Integrated <strong>Neo4j knowledge graphs</strong> to improve information retrieval and knowledge connectivity; won <strong>Third Prize</strong> in the Shanghai Collegiate Computer Application Competition.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-top">
+            <span class="project-label">Mar 2024 — Jun 2024</span>
+            <span class="company">Nestlé CEO Challenge – Marketing Innovation Track</span>
+            <span class="position">Team Member · Key-account research · Top 5</span>
+          </div>
+          <div class="entry-body">
+            <ul>
+              <li>Conducted <strong>key-account market research</strong> across Nestlé Professional food-service channels, customer needs and competitor strategies.</li>
+              <li>Evaluated commercial potential and refined an actionable channel-expansion proposal that achieved a <strong>Top 5 placement</strong>.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading">
+        <div>
+          <p class="stage"><span class="stage-no">Section 04</span>Skills<span class="dots dots-4" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></p>
+          <h2 id="skills-title">Skills with<br>purpose.</h2>
+        </div>
+        <p>A practical toolkit for moving from raw commercial data to a clear, decision-ready story.</p>
+      </div>
+
+      <div class="skills-layout">
+        <article class="skill-group">
+          <h3>Data Analysis &amp; BI</h3>
+          <ul class="pills">
+            <li>Excel</li>
+            <li class="hot">Power BI</li>
+            <li class="hot">Tableau</li>
+            <li>SPSS</li>
+          </ul>
+        </article>
+        <article class="skill-group">
+          <h3>Querying &amp; Databases</h3>
+          <ul class="pills">
+            <li class="hot">SQL</li>
+            <li>SQL Server</li>
+            <li>MySQL</li>
+            <li class="hot">Trino</li>
+            <li class="hot">Spark SQL</li>
+          </ul>
+        </article>
+        <article class="skill-group">
+          <h3>Programming</h3>
+          <ul class="pills">
+            <li class="hot">Python</li>
+            <li>Django</li>
+            <li>Neo4j</li>
+          </ul>
+        </article>
+        <article class="skill-group">
+          <h3>Business Analytics</h3>
+          <ul class="pills">
+            <li>KPI analysis</li>
+            <li class="hot">Conversion analysis</li>
+            <li>CRM analysis</li>
+            <li>Sales operations</li>
+            <li>Dashboard development</li>
+          </ul>
+        </article>
+      </div>
+      <p class="skills-legend"><span aria-hidden="true"></span>Highlighted: core tools from my internships and profile headline.</p>
+    </section>
+  </main>
+
+  <footer class="contact-section" id="contact">
+    <div class="contact-inner">
+      <p class="stage"><span class="stage-no">Section 05</span>Contact<span class="dots dots-5" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></p>
+      <h2>Turn data into <mark>direction.</mark></h2>
+      <p class="contact-lead">If you have a business problem worth solving with data, I would love to hear about it.</p>
+      <div class="contact-links">
+        <a class="button button--primary" href="mailto:XUJI0030@e.ntu.edu.sg?subject=Business%20Analytics%20Enquiry">XUJI0030@e.ntu.edu.sg <span aria-hidden="true">↗</span></a>
+        <a class="button" href="https://www.linkedin.com/in/ntu-xujie" target="_blank" rel="noopener noreferrer">LinkedIn profile <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="footer-line">
+        <span>Xu Jie · Aspiring Business &amp; Data Analyst</span>
+        <span>Singapore · 2026</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
